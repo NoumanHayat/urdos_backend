@@ -15,16 +15,12 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
   },
-  photo: String,
-
   password: {
     type: String,
     required: [true, "Please provide a password"],
     minlength: 8,
     select: false,
   },
-
-
   passwordConfirm: {
     type: String,
     required: [true, "Please confirm your password"],
@@ -36,59 +32,11 @@ const userSchema = new mongoose.Schema({
       message: "Passwords are not the same!",
     },
   },
-  age:Number,
-  Weight: {
-    type: Number,
-    required: [true, "Please confirm your Weight"],
-    Default: '0.0',
+  subscription: {
+    type: Date,
+    default: new Date(),
   },
-
-  Height: {
-    type: Number,
-    Default: 0.0,
-  },
-  Country: {
-    type: String,
-    // required: true,
-    Default: "Pakistan",
-  },
-  Goal: String,
-  ActivityLevel: String,
-  weeklyGoal: {
-    type: Number,
-  },
-  Gender: {
-    type: String,
-    Enum: ["Male", "Female"],
-  },
-  SubscriptionStatus: {
-    type: String,
-    Enum: ["premium", "trial"],
-  },
-  MaintenanceCalories: {
-    type: Number,
-  },
-  BodyFat: {
-    type: Number,
-  },
-  // Meals: [
-  //   {
-  //     Type: Schema.Types.ObjectId,
-  //     Ref: "Meal",
-  //   },
-  // ],
-  Recommendations: {
-    type: [String],
-  },
-  // WorkoutSessions: [
-  //   {
-  //     Type: Schema.Types.ObjectId,
-  //     Ref: "Workout",
-  //   },
-  // ],
-  //============================================================================
-
-  //============================================================================
+  
   passwordResetToken: String,
   passwordResetExpires: Date,
 });
@@ -100,7 +48,7 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = undefined;
   next();
 });
- 
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword

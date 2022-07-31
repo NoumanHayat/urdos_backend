@@ -10,12 +10,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const AppError =require('./utils/AppError')
 const userRoute = require('./routes/userRoutes')
-const mealRoute = require('./routes/calRoutes')
-const coachingRoute = require('./routes/coachingRoutes')
-const workoutbuilderRoutes= require('./routes/workoutbuilderRoutes')
-const paymentRoute=require("./routes/paymentRoutes")
-const progressTrackingRoutes= require("./routes/progressTrackingRoutes")
-const externalRoutes = require("./routes/externalRoutes")
 // create express
 const app = express();
 app.use(cors());
@@ -51,16 +45,10 @@ app.all("/",(req, res) => {
   res.send("ok")
 })
 app.use('/api/user', userRoute);
-app.use('/api/meal', mealRoute);
-app.use('/api/workoutbuilderRoutes',workoutbuilderRoutes);
-app.use('/api/coachingRoute', coachingRoute);
-app.use('/api/payment', paymentRoute);
-app.use('/api/progressTracking', progressTrackingRoutes);
-app.use('/api/external',externalRoutes)
 // progressTrackingRoutes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 // app.use(globalErrorHandler);
 
-module.exports = app;
+module.exports = app; 
