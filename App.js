@@ -10,8 +10,9 @@ const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const AppError =require('./utils/AppError')
 const userRoute = require('./routes/userRoutes')
+const bookRoute = require('./routes/bookRoutes')
 // create express
-const app = express();
+const app = express(); 
 app.use(cors());
 app.use(helmet());
 if (process.env.NODE_ENV === "development") {
@@ -45,6 +46,7 @@ app.all("/",(req, res) => {
   res.send("ok")
 })
 app.use('/api/user', userRoute);
+app.use('/api/book', bookRoute);
 // progressTrackingRoutes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

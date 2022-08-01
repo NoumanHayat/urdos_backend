@@ -31,7 +31,9 @@ const createSendToken = (user, statusCode, res) => {
     token,
   });
 }; 
+const saveImage =async (req, res, next) => {
 
+}
 exports.signup = catchAsync(async (req, res, next) => {
   console.log(req.body);
 
@@ -40,7 +42,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
-  });
+  }); 
   req.user = newUser;
   try {
     await sendEmail({
