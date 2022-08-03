@@ -12,6 +12,7 @@ const AppError =require('./utils/AppError')
 const userRoute = require('./routes/userRoutes')
 const bookRoute = require('./routes/bookRoutes')
 const testimonialRoute = require('./routes/testimonialRoutes')
+const faqRoute = require('./routes/faqRoutes')
 // create express
 const app = express(); 
 app.use(cors());
@@ -49,6 +50,7 @@ app.all("/",(req, res) => {
 app.use('/api/user', userRoute);
 app.use('/api/book', bookRoute);
 app.use('/api/testimonial',testimonialRoute)
+app.use('/api/faq', faqRoute);
 // progressTrackingRoutes
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
