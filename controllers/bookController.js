@@ -20,7 +20,7 @@ exports.createBook = catchAsync(async (req, res, next) => {
     type: req.body.type,
     paidType: req.body.paidType,
     publishingType: req.body.publishingType,
-    profile: req.body.profile,
+    coverPhoto: req.body.coverPhoto,
   });
   res.status(200).json({ status: "success", book: newBook });
 });
@@ -62,18 +62,39 @@ exports.getAllBook = catchAsync(async (req, res, next) => {
         from: 'Episode',
         localField: '_id',
         foreignField: 'book_id',
+        'pipeline': [{
+          '$sort': { 'part': 1 }
+        },
+        {
+          $lookup: {
+            from: 'Comments',
+            localField: '_id',
+            foreignField: 'episode_id',
+            'pipeline': [{
+              '$sort': { 'date': 1 },
+            },
+            {
+              $lookup: {
+                from: 'User',
+                localField: 'publisher_id',
+                foreignField: '_id',
+                'pipeline': [{
+                  $group: {"_id": "$_id","name": {$first: "$name"},"profile": {$first: "$profile"}}
+
+                }],
+                as: 'User'
+              }
+            },
+            
+            ],
+            as: 'Comments'
+          }
+        }
+        ],
         as: 'Episode'
       },
-    }
 
-    // $group: { _id: '$name' }      // $lookup: {
-    //   from: "Book", // collection to join
-    //   localField: "_id",//field from the input documents
-    //   foreignField: "publisher_id",//field from the documents of the "from" collection
-    //   as: "Book"// output array field
-    // }
-
-    // },
+    },
 
   ])
   console.log(check)

@@ -41,7 +41,7 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide publishingType "],
   },
-  profile: {
+  coverPhoto: {
     type: String,
   }
 },{ collection: 'Book'});
