@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
   
   passwordResetToken: String,
   passwordResetExpires: Date,
-});
+},{ collection: 'User'});
 
 userSchema.pre("save", async function (next) {
   // Hash the password with cost of 12

@@ -8,10 +8,9 @@ const bookSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: [true, "Meal must belong to a user"],
-  }, 
+  },
   title: {
     type: String,
-    unique: true,
     required: [true, "Please enter title!"],
   },
   writer: {
@@ -45,7 +44,7 @@ const bookSchema = new mongoose.Schema({
   profile: {
     type: String,
   }
-});
+},{ collection: 'Book'});
 
 const Book = mongoose.model("Book", bookSchema);
 
