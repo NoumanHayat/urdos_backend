@@ -14,5 +14,10 @@ exports.addTestimonial = catchAsync(async (req, res, next) => {
         testimonial: req.body.testimonial,
         image: req.body.image,
     });
-    res.status(200).json({ status: "success", book: newTestimonial });
+    res.status(200).json({ status: "success", testimonial: newTestimonial });
+});
+exports.getTestimonial = catchAsync(async (req, res, next) => {
+
+    const allTestimonial = await Testimonial.find();
+    res.status(200).json({ status: "success", testimonial: allTestimonial });
 });

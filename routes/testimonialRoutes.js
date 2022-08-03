@@ -5,6 +5,8 @@ const authController = require("./../controllers/authController");
 const router = express.Router();
 console.clear()
 router.route("/addTestimonial")
-    .post(authController.protect, testimonialController.addTestimonial)
+    .post( testimonialController.addTestimonial)
+router.route("/getTestimonial")
+    .get( testimonialController.getTestimonial)
 
-module.exports = router;
+module.exports = router;  
