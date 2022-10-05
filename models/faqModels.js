@@ -13,7 +13,7 @@ const faqSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide solution"],
 
-    },
+    }, 
     
 }, { collection: 'Faq' });
 

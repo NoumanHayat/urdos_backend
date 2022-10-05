@@ -39,7 +39,9 @@ const userSchema = new mongoose.Schema({
   profile: {
     type: String,
   }, 
-  
+  phoneNumber:{
+    type: String,
+  },
   passwordResetToken: String,
   passwordResetExpires: Date,
 },{ collection: 'User'}); 
