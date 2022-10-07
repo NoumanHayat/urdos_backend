@@ -25,16 +25,16 @@ exports.createBook = catchAsync(async (req, res, next) => {
   res.status(200).json({ status: "success", book: newBook });
 });
 exports.addEpisode = catchAsync(async (req, res, next) => {
-  const newEpisode = await Episode.create({
-    book_id: req.body.book_id,
-    title: req.body.title,
-    description: req.body.description,
-    part: req.body.part,
-    selectDate: req.body.selectDate,
-    publishingType: req.body.publishingType,
-    paidType: req.body.paidType,
-    audioUrl: req.body.audioUrl,
-  });
+    const newEpisode = await Episode.create({
+      book_id: req.body.book_id,
+      title: req.body.title+" ",
+      description: req.body.description,
+      part: i,
+      selectDate: req.body.selectDate,
+      publishingType: req.body.publishingType,
+      paidType: req.body.paidType,
+      audioUrl: req.body.audioUrl,
+    });
   res.status(200).json({ status: "success", book: newEpisode });
 });
 exports.addComment = catchAsync(async (req, res, next) => {
@@ -79,13 +79,13 @@ exports.getAllBook = catchAsync(async (req, res, next) => {
                 localField: 'publisher_id',
                 foreignField: '_id',
                 'pipeline': [{
-                  $group: {"_id": "$_id","name": {$first: "$name"},"profile": {$first: "$profile"}}
+                  $group: { "_id": "$_id", "name": { $first: "$name" }, "profile": { $first: "$profile" } }
 
                 }],
                 as: 'User'
               }
             },
-            
+
             ],
             as: 'Comments'
           }

@@ -29,8 +29,9 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide description "],
   },
+  //change here
   type: {
-    type: String,
+    type: [String], 
     required: [true, "Please provide type "],
   },
   paidType: {
