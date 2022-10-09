@@ -40,7 +40,6 @@ io.on("connection", (socket) => {
     console.log(socket.id);
   });
   socket.on("dashboard", async (msg) => {
-    console.log(msg);
     Dashboard(socket, msg);
     // sendFunction(socket, msg);
   });
